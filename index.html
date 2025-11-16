@@ -190,6 +190,13 @@
     .btn-warning:hover { 
         background-color: #e6b800; 
     }
+    .btn-info { 
+        background-color: #9933ff; 
+        color: white; 
+    }
+    .btn-info:hover { 
+        background-color: #7a29cc; 
+    }
     .btn:disabled { 
         background-color: #cccccc; 
         color: #999;
@@ -368,6 +375,270 @@
         50% { transform: rotate(-5deg) translateY(-5px); }
     }
 
+    /* Search Box Styles */
+    .search-container {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .search-box {
+        padding: 12px 15px;
+        border: 3px solid #333;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Comic Sans MS', sans-serif;
+        width: 300px;
+        max-width: 100%;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .search-box:focus {
+        outline: none;
+        box-shadow: 5px 5px 0 #ffcc00;
+        transform: translateY(-2px);
+    }
+    .search-btn {
+        padding: 12px 20px;
+        background-color: #ff6600;
+        color: white;
+        border: 3px solid #333;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', sans-serif;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .search-btn:hover {
+        background-color: #e65c00;
+        transform: translateY(-2px);
+        box-shadow: 5px 5px 0 #333;
+    }
+    .search-btn:active {
+        transform: translateY(1px);
+        box-shadow: 2px 2px 0 #333;
+    }
+    .clear-search {
+        padding: 12px 20px;
+        background-color: #cccccc;
+        color: #333;
+        border: 3px solid #333;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', sans-serif;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .clear-search:hover {
+        background-color: #b3b3b3;
+        transform: translateY(-2px);
+        box-shadow: 5px 5px 0 #333;
+    }
+    .clear-search:active {
+        transform: translateY(1px);
+        box-shadow: 2px 2px 0 #333;
+    }
+
+    /* Filter Styles */
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        padding: 10px 20px;
+        background-color: #99ccff;
+        color: #333;
+        border: 3px solid #333;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', sans-serif;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 5px 5px 0 #333;
+    }
+    .filter-btn.active {
+        background-color: #3399ff;
+        color: white;
+    }
+
+    /* QR Code Modal Styles */
+    .qr-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+    .qr-modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 20px;
+        border: 5px solid #333;
+        box-shadow: 10px 10px 0 #333, 15px 15px 0 #ffcc00;
+        max-width: 90%;
+        max-height: 90%;
+        overflow: auto;
+        position: relative;
+    }
+    .qr-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .qr-modal-title {
+        font-size: 28px;
+        color: #ff3300;
+        text-shadow: 2px 2px 0 #ffcc00;
+        margin: 0;
+    }
+    .close-modal {
+        background-color: #ff3333;
+        color: white;
+        border: 3px solid #333;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .close-modal:hover {
+        transform: translateY(-2px);
+        box-shadow: 5px 5px 0 #333;
+    }
+    .qr-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .qr-display {
+        position: relative;
+        width: 320px;
+        height: 370px;
+        overflow: hidden;
+        border: 4px solid #333;
+        border-radius: 15px;
+        box-shadow: 5px 5px 0 #333;
+        background: white;
+        touch-action: pan-y;
+    }
+    .qr-slides {
+        display: flex;
+        transition: transform 0.3s ease;
+        height: 100%;
+        width: 100%;
+    }
+    .qr-slide {
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .qr-code {
+        width: 220px;
+        height: 220px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .qr-code img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+    }
+    .qr-info {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        background: #fff9e6;
+        padding: 8px 15px;
+        border-radius: 10px;
+        border: 2px solid #333;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .qr-nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .qr-nav-btn {
+        padding: 8px 15px;
+        background-color: #ffcc00;
+        color: #333;
+        border: 3px solid #333;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Comic Sans MS', sans-serif;
+        box-shadow: 3px 3px 0 #333;
+        transition: all 0.2s;
+    }
+    .qr-nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 5px 5px 0 #333;
+    }
+    .qr-nav-btn:active {
+        transform: translateY(1px);
+        box-shadow: 2px 2px 0 #333;
+    }
+    .qr-nav-btn:disabled {
+        background-color: #cccccc;
+        color: #999;
+        cursor: not-allowed;
+        box-shadow: 2px 2px 0 #999;
+        border-color: #999;
+    }
+    .qr-counter {
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 10px;
+        background: #3399ff;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        border: 2px solid #333;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .container {
@@ -393,6 +664,31 @@
         }
         th, td {
             padding: 8px;
+        }
+        .search-container {
+            flex-direction: column;
+        }
+        .search-box {
+            width: 100%;
+        }
+        .filter-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        .filter-btn {
+            width: 100%;
+            max-width: 200px;
+        }
+        .qr-modal-content {
+            padding: 20px;
+        }
+        .qr-display {
+            width: 280px;
+            height: 330px;
+        }
+        .qr-code {
+            width: 200px;
+            height: 200px;
         }
     }
 </style>
@@ -423,7 +719,23 @@
     <div class="button-group">
         <button class="btn btn-success" id="copyAllBtn" onclick="copyAllLinks()" disabled>Copy All Links</button>
         <button class="btn btn-primary" onclick="exportToCSV()" id="exportBtn" disabled>Export to CSV</button>
+        <button class="btn btn-info" id="openQRBtn" onclick="openQRModal()" disabled>Open QR Codes</button>
         <div class="speech-bubble">Click me!</div>
+    </div>
+    
+    <!-- Sales Type Filters -->
+    <div class="filter-container" id="salesTypeFilters" style="display: none;">
+        <button class="filter-btn active" data-type="all">All</button>
+        <button class="filter-btn" data-type="DINE-IN">Dine-in</button>
+        <button class="filter-btn" data-type="TAKEAWAY">Takeaway</button>
+        <button class="filter-btn" data-type="DELIVERY">Delivery</button>
+    </div>
+    
+    <!-- Search Box -->
+    <div class="search-container">
+        <input type="text" id="searchBox" class="search-box" placeholder="Search by Order ID (e.g., 5031)" disabled>
+        <button class="search-btn" id="searchBtn" onclick="searchOrderId()" disabled>Search</button>
+        <button class="clear-search" id="clearSearchBtn" onclick="clearSearch()" disabled>Clear Search</button>
     </div>
     
     <div class="table-container">
@@ -442,9 +754,44 @@
     </div>
 </div>
 
+<!-- QR Code Modal -->
+<div class="qr-modal" id="qrModal">
+    <div class="qr-modal-content">
+        <div class="qr-modal-header">
+            <h2 class="qr-modal-title">QR Codes</h2>
+            <button class="close-modal" onclick="closeQRModal()">✕</button>
+        </div>
+        
+        <!-- QR Code Filters -->
+        <div class="filter-container" id="qrFilters">
+            <button class="filter-btn active" data-type="all">All</button>
+            <button class="filter-btn" data-type="DINE-IN">Dine-in</button>
+            <button class="filter-btn" data-type="TAKEAWAY">Takeaway</button>
+            <button class="filter-btn" data-type="DELIVERY">Delivery</button>
+        </div>
+        
+        <div class="qr-container">
+            <div class="qr-display" id="qrDisplay">
+                <div class="qr-slides" id="qrSlides">
+                    <!-- QR slides will be generated here -->
+                </div>
+            </div>
+            <div class="qr-nav">
+                <button class="qr-nav-btn" id="prevBtn" onclick="prevQR()">Previous</button>
+                <button class="qr-nav-btn" id="nextBtn" onclick="nextQR()">Next</button>
+            </div>
+            <div class="qr-counter" id="qrCounter">1 / 0</div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 let currentData = [];
+let filteredData = [];
+let currentQRData = [];
+let currentQRIndex = 0;
 const storeID = "91KDIPL540-01"; // Store Code
 
 // Excel date/time converters
@@ -514,30 +861,27 @@ function processFile() {
                         copied: false // Track if this link has been copied
                     };
                     currentData.push(linkData);
-
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${linkData.receiptNo}</td>
-                        <td>${linkData.salesType}</td>
-                        <td>${linkData.surveyModel}</td>
-                        <td>${linkData.link}</td>
-                        <td><button class="copy-btn" data-index="${currentData.length - 1}">Copy</button></td>
-                    `;
-                    tbody.appendChild(tr);
                 }
             });
 
-            // Add event listeners to all copy buttons
-            document.querySelectorAll('.copy-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    copyIndividualLink(index, this);
-                });
-            });
+            // Display all data initially
+            displayData(currentData);
 
             showStatus(`Processed ${processedCount} records`, 'success');
             document.getElementById('copyAllBtn').disabled = false;
             document.getElementById('exportBtn').disabled = false;
+            document.getElementById('openQRBtn').disabled = false;
+            
+            // Enable search functionality
+            document.getElementById('searchBox').disabled = false;
+            document.getElementById('searchBtn').disabled = false;
+            document.getElementById('clearSearchBtn').disabled = false;
+            
+            // Show sales type filters
+            document.getElementById('salesTypeFilters').style.display = 'flex';
+            
+            // Generate QR codes for all data
+            generateQRCodes(currentData);
         } catch (err) {
             showStatus('Error: ' + err.message, 'error');
         }
@@ -545,9 +889,92 @@ function processFile() {
     reader.readAsArrayBuffer(file);
 }
 
+// Display data in table
+function displayData(data) {
+    const tbody = document.querySelector('#linkTable tbody');
+    tbody.innerHTML = '';
+
+    data.forEach((linkData, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${linkData.receiptNo}</td>
+            <td>${linkData.salesType}</td>
+            <td>${linkData.surveyModel}</td>
+            <td>${linkData.link}</td>
+            <td><button class="copy-btn" data-index="${index}">Copy</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    // Add event listeners to all copy buttons
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            copyIndividualLink(index, this);
+        });
+    });
+}
+
+// Search by Order ID
+function searchOrderId() {
+    const searchTerm = document.getElementById('searchBox').value.trim();
+    
+    if (!searchTerm) {
+        showStatus('Please enter a search term', 'error');
+        return;
+    }
+    
+    // Filter data based on search term
+    filteredData = currentData.filter(item => 
+        item.receiptNo.includes(searchTerm)
+    );
+    
+    if (filteredData.length === 0) {
+        showStatus('No matching records found', 'error');
+        return;
+    }
+    
+    // Display filtered data
+    displayData(filteredData);
+    
+    showStatus(`Found ${filteredData.length} matching records`, 'success');
+}
+
+// Clear search and show all data
+function clearSearch() {
+    document.getElementById('searchBox').value = '';
+    displayData(currentData);
+    showStatus('Showing all records', 'success');
+}
+
+// Filter by sales type
+function setupSalesTypeFilters() {
+    document.querySelectorAll('#salesTypeFilters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            document.querySelectorAll('#salesTypeFilters .filter-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            const type = this.getAttribute('data-type');
+            
+            if (type === 'all') {
+                displayData(currentData);
+                showStatus('Showing all records', 'success');
+            } else {
+                const filtered = currentData.filter(item => item.salesType === type);
+                displayData(filtered);
+                showStatus(`Showing ${filtered.length} ${type.toLowerCase()} records`, 'success');
+            }
+        });
+    });
+}
+
 // Copy individual link
 function copyIndividualLink(index, button) {
-    const linkData = currentData[index];
+    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
+    const linkData = dataToUse[index];
     
     // If already copied, do nothing
     if (linkData.copied) {
@@ -589,7 +1016,8 @@ function copyIndividualLink(index, button) {
 
 // Copy all links
 function copyAllLinks() {
-    const links = currentData.map(item => item.link).join('\n');
+    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
+    const links = dataToUse.map(item => item.link).join('\n');
     
     // Create a temporary textarea element
     const textArea = document.createElement("textarea");
@@ -605,7 +1033,7 @@ function copyAllLinks() {
         const successful = document.execCommand('copy');
         if (successful) {
             // Mark all links as copied and disable all copy buttons
-            currentData.forEach((item, index) => {
+            dataToUse.forEach((item, index) => {
                 item.copied = true;
             });
             
@@ -629,10 +1057,12 @@ function copyAllLinks() {
 
 // Export to CSV
 function exportToCSV() {
-    if (currentData.length === 0) return showStatus('No data to export', 'error');
+    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
+    
+    if (dataToUse.length === 0) return showStatus('No data to export', 'error');
     
     let csvContent = "Receipt No.,Sales Type,Survey Model,Generated Link\n";
-    currentData.forEach(row => {
+    dataToUse.forEach(row => {
         csvContent += `"${row.receiptNo}","${row.salesType}","${row.surveyModel}","${row.link}"\n`;
     });
     
@@ -648,16 +1078,190 @@ function exportToCSV() {
     showStatus('CSV exported successfully!', 'success');
 }
 
+// Generate QR codes
+function generateQRCodes(data) {
+    currentQRData = data;
+    const qrSlides = document.getElementById('qrSlides');
+    qrSlides.innerHTML = '';
+    
+    if (data.length === 0) {
+        qrSlides.innerHTML = '<div class="qr-slide"><p>No data available for QR codes</p></div>';
+        updateQRCounter();
+        return;
+    }
+    
+    data.forEach((item, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'qr-slide';
+        
+        // Create QR code
+        const qrCode = document.createElement('div');
+        qrCode.className = 'qr-code';
+        qrCode.id = `qr-${index}`;
+        
+        // Create info div
+        const info = document.createElement('div');
+        info.className = 'qr-info';
+        info.innerHTML = `
+            <div>Receipt: ${item.receiptNo}</div>
+            <div>Type: ${item.salesType}</div>
+        `;
+        
+        slide.appendChild(qrCode);
+        slide.appendChild(info);
+        qrSlides.appendChild(slide);
+        
+        // Generate QR code
+        const qr = qrcode(0, 'M');
+        qr.addData(item.link);
+        qr.make();
+        qrCode.innerHTML = qr.createImgTag(5);
+    });
+    
+    currentQRIndex = 0;
+    updateQRSlides();
+    updateQRCounter();
+    updateQRNavigation();
+}
+
+// Open QR modal
+function openQRModal() {
+    document.getElementById('qrModal').style.display = 'flex';
+    generateQRCodes(currentQRData);
+}
+
+// Close QR modal
+function closeQRModal() {
+    document.getElementById('qrModal').style.display = 'none';
+}
+
+// Filter QR codes by sales type
+function setupQRFilters() {
+    document.querySelectorAll('#qrFilters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            document.querySelectorAll('#qrFilters .filter-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            const type = this.getAttribute('data-type');
+            
+            if (type === 'all') {
+                generateQRCodes(currentData);
+            } else {
+                const filtered = currentData.filter(item => item.salesType === type);
+                generateQRCodes(filtered);
+            }
+        });
+    });
+}
+
+// Navigate QR codes
+function nextQR() {
+    if (currentQRIndex < currentQRData.length - 1) {
+        currentQRIndex++;
+        updateQRSlides();
+        updateQRCounter();
+        updateQRNavigation();
+    }
+}
+
+function prevQR() {
+    if (currentQRIndex > 0) {
+        currentQRIndex--;
+        updateQRSlides();
+        updateQRCounter();
+        updateQRNavigation();
+    }
+}
+
+function updateQRSlides() {
+    const qrSlides = document.getElementById('qrSlides');
+    qrSlides.style.transform = `translateX(-${currentQRIndex * 100}%)`;
+}
+
+function updateQRCounter() {
+    const counter = document.getElementById('qrCounter');
+    counter.textContent = `${currentQRIndex + 1} / ${currentQRData.length}`;
+}
+
+function updateQRNavigation() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    
+    prevBtn.disabled = currentQRIndex === 0;
+    nextBtn.disabled = currentQRIndex === currentQRData.length - 1;
+}
+
+// Add swipe functionality for QR codes
+function setupSwipe() {
+    const qrDisplay = document.getElementById('qrDisplay');
+    let startX = 0;
+    let endX = 0;
+    
+    qrDisplay.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+    });
+    
+    qrDisplay.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+    
+    // Add mouse support for desktop
+    qrDisplay.addEventListener('mousedown', function(e) {
+        startX = e.clientX;
+        document.addEventListener('mouseup', handleMouseUp);
+    });
+    
+    function handleMouseUp(e) {
+        endX = e.clientX;
+        handleSwipe();
+        document.removeEventListener('mouseup', handleMouseUp);
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next
+                nextQR();
+            } else {
+                // Swipe right - previous
+                prevQR();
+            }
+        }
+    }
+}
+
 // Clear all data
 function clearData() {
     currentData = [];
+    filteredData = [];
+    currentQRData = [];
+    currentQRIndex = 0;
     document.querySelector('#linkTable tbody').innerHTML = '';
     document.getElementById('fileInput').value = '';
     document.getElementById('fileName').textContent = 'No file chosen';
     document.getElementById('copyAllBtn').disabled = true;
     document.getElementById('exportBtn').disabled = true;
-    document.getElementById('generateBtn').disabled = true;
+    document.getElementById('openQRBtn').disabled = true;
     document.getElementById('status').style.display = 'none';
+    
+    // Disable search functionality
+    document.getElementById('searchBox').disabled = true;
+    document.getElementById('searchBtn').disabled = true;
+    document.getElementById('clearSearchBtn').disabled = true;
+    document.getElementById('searchBox').value = '';
+    
+    // Hide filters
+    document.getElementById('salesTypeFilters').style.display = 'none';
+    
+    // Close QR modal if open
+    closeQRModal();
 }
 
 // Show status message
@@ -673,6 +1277,28 @@ document.getElementById('fileInput').addEventListener('change', function() {
     const fileName = this.files.length > 0 ? this.files[0].name : 'No file chosen';
     document.getElementById('fileName').textContent = fileName;
     document.getElementById('generateBtn').disabled = !this.files.length;
+});
+
+// Enable search when Enter key is pressed in search box
+document.getElementById('searchBox').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        searchOrderId();
+    }
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('qrModal');
+    if (event.target === modal) {
+        closeQRModal();
+    }
+});
+
+// Initialize filters and swipe functionality
+document.addEventListener('DOMContentLoaded', function() {
+    setupSalesTypeFilters();
+    setupQRFilters();
+    setupSwipe();
 });
 </script>
 </body>
