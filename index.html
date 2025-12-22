@@ -5,691 +5,547 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Survey Link Generator</title>
 <style>
-    body {
-        font-family: 'Comic Sans MS', 'Marker Felt', 'Arial Rounded MT Bold', sans-serif;
+    /* Ultra-compact, clean design */
+    :root {
+        --bg: #f9fafb;
+        --card: #ffffff;
+        --text: #111827;
+        --text-light: #6b7280;
+        --primary: #3b82f6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --border: #e5e7eb;
+        --radius: 8px;
+        --shadow: 0 1px 3px rgba(0,0,0,0.1);
+        --maxw: 1000px;
+    }
+
+    /* Base */
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
         margin: 0;
-        padding: 20px;
-        background-color: #e6f2ff;
-        background-image: radial-gradient(#b3d9ff 15%, transparent 16%),
-                          radial-gradient(#b3d9ff 15%, transparent 16%);
-        background-size: 40px 40px;
-        background-position: 0 0, 20px 20px;
-        color: #333;
+        padding: 6px;
+        background: var(--bg);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        font-size: 13px;
+        line-height: 1.3;
+        color: var(--text);
+        height: 100%;
     }
+
+    /* Container */
     .container {
-        max-width: 1200px;
+        max-width: var(--maxw);
         margin: 0 auto;
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 8px 8px 0 #333, 15px 15px 0 #ffcc00;
-        border: 4px solid #333;
-        position: relative;
-        overflow: hidden;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        padding: 12px;
     }
-    .container:before {
-        content: "";
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        border: 3px dashed #ff6600;
-        border-radius: 20px;
-        pointer-events: none;
-        z-index: -1;
-    }
+
+    /* Header */
     h1 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        font-weight: 600;
         text-align: center;
-        font-size: 36px;
-        margin-bottom: 25px;
-        color: #ff3300;
-        text-shadow: 3px 3px 0 #ffcc00, 6px 6px 0 rgba(0,0,0,0.2);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        position: relative;
-        display: inline-block;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 10px 30px;
-        background: white;
-        border: 4px solid #333;
-        border-radius: 15px;
-        box-shadow: 5px 5px 0 #333;
+        color: var(--primary);
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
     }
-    h1:after {
-        content: "!!!";
-        position: absolute;
-        top: -20px;
-        right: -20px;
-        background: #ffcc00;
-        color: #ff3300;
-        font-size: 24px;
-        padding: 5px 10px;
-        border-radius: 50%;
-        border: 3px solid #333;
-        transform: rotate(15deg);
-        animation: bounce 1s infinite alternate;
-    }
-    @keyframes bounce {
-        from { transform: rotate(15deg) scale(1); }
-        to { transform: rotate(15deg) scale(1.1); }
-    }
+
+    /* File Upload - Compact */
     .file-section {
-        text-align: center;
-        margin: 25px 0;
-        padding: 25px;
-        border: 4px dashed #ff6600;
-        border-radius: 15px;
-        background-color: #fff9e6;
-        position: relative;
-        min-height: 120px;
         display: flex;
-        flex-direction: column;
+        gap: 8px;
         align-items: center;
-        justify-content: center;
+        margin-bottom: 10px;
+        padding: 8px;
+        background: #f8fafc;
+        border-radius: var(--radius);
+        border: 1px dashed var(--border);
     }
-    .file-section:before {
-        content: "📁";
-        position: absolute;
-        top: -20px;
-        left: 20px;
-        font-size: 40px;
-        background: white;
-        padding: 5px;
-        border: 3px solid #333;
-        border-radius: 10px;
-        transform: rotate(-10deg);
-    }
+
     .file-input-container {
         display: flex;
-        flex-direction: column;
+        gap: 8px;
         align-items: center;
-        gap: 15px;
-        width: 100%;
-        max-width: 400px;
+        flex: 1;
+        min-width: 0;
     }
+
     .file-label {
-        font-weight: bold;
-        font-size: 18px;
-        color: #333;
-        background: #ffcc00;
-        padding: 8px 15px;
-        border-radius: 8px;
-        border: 2px solid #333;
-        box-shadow: 3px 3px 0 #333;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        background: var(--primary);
+        color: white;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s;
+        white-space: nowrap;
+        border: none;
     }
-    .file-label:hover {
-        transform: translateY(-2px);
-        box-shadow: 4px 4px 0 #333;
-    }
+
     input[type="file"] {
         display: none;
     }
+
     .file-name {
-        font-size: 16px;
-        color: #666;
+        flex: 1;
+        min-width: 0;
+        padding: 6px 8px;
         background: white;
-        padding: 8px 15px;
-        border-radius: 8px;
-        border: 2px solid #3399ff;
-        max-width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 12px;
+        color: var(--text-light);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Button Groups - Dense */
+    .button-group {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+        height: 32px;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-success {
+        background: var(--success);
+        color: white;
+    }
+
+    .btn-warning {
+        background: var(--warning);
+        color: white;
+    }
+
+    .btn-info {
+        background: #7c3aed;
+        color: white;
+    }
+
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Status - Minimal */
+    .status {
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        border: 1px solid;
+        display: none;
+    }
+
+    .status.success {
+        background: #ecfdf5;
+        color: #065f46;
+        border-color: #a7f3d0;
+    }
+
+    .status.error {
+        background: #fef2f2;
+        color: #991b1b;
+        border-color: #fecaca;
+    }
+
+    /* Filters & Search - Compact */
+    .filter-container {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: white;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+        border-color: var(--primary);
+    }
+
+    .filter-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+
+    .search-container {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        flex: 1;
+        min-width: 200px;
+        max-width: 300px;
+        padding: 6px 8px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 12px;
+        height: 32px;
+    }
+
+    .search-box:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .search-btn, .clear-search {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: white;
+        font-size: 12px;
+        cursor: pointer;
+        height: 32px;
+    }
+
+    /* Table - Ultra Compact */
+    .table-container {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: auto;
+        max-height: 400px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        min-width: 700px;
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        background: #f9fafb;
+        z-index: 10;
+    }
+
+    thead th {
+        padding: 8px 10px;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-light);
+        border-bottom: 2px solid var(--border);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s ease;
+    }
+
+    tbody tr:hover {
+        background: #f3f4f6;
+    }
+
+    tbody td {
+        padding: 6px 10px;
+        vertical-align: top;
+    }
+
+    /* Link cell with truncation */
+    td:nth-child(4) {
+        max-width: 300px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+        font-size: 11px;
+        color: #374151;
     }
-    .button-group {
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-        margin: 25px 0;
-        flex-wrap: wrap;
-    }
-    .btn {
-        padding: 12px 25px;
-        border: 3px solid #333;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        transition: all 0.2s;
-        position: relative;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 4px 4px 0 #333;
-    }
-    .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 6px 6px 0 #333;
-    }
-    .btn:active {
-        transform: translateY(1px);
-        box-shadow: 2px 2px 0 #333;
-    }
-    .btn-primary { 
-        background-color: #3399ff; 
-        color: white; 
-    }
-    .btn-primary:hover { 
-        background-color: #0077e6; 
-    }
-    .btn-success { 
-        background-color: #33cc33; 
-        color: white; 
-    }
-    .btn-success:hover { 
-        background-color: #29a329; 
-    }
-    .btn-warning { 
-        background-color: #ffcc00; 
-        color: #333; 
-    }
-    .btn-warning:hover { 
-        background-color: #e6b800; 
-    }
-    .btn-info { 
-        background-color: #9933ff; 
-        color: white; 
-    }
-    .btn-info:hover { 
-        background-color: #7a29cc; 
-    }
-    .btn:disabled { 
-        background-color: #cccccc; 
-        color: #999;
-        cursor: not-allowed; 
-        box-shadow: 2px 2px 0 #999;
-        border-color: #999;
-    }
-    .btn:disabled:hover {
-        transform: none;
-        box-shadow: 2px 2px 0 #999;
-    }
-    table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin-top: 25px;
-        border: 4px solid #333;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 5px 5px 0 #333;
-        background: white;
-    }
-    th, td {
-        border-bottom: 3px solid #333;
-        border-right: 3px solid #333;
-        padding: 12px;
-        text-align: left;
-        vertical-align: middle;
-    }
-    th {
-        background-color: #ff6600;
-        color: white;
-        position: sticky;
-        top: 0;
-        font-size: 18px;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-    }
-    th:last-child, td:last-child {
-        border-right: none;
-    }
-    tr:last-child td {
-        border-bottom: none;
-    }
-    tr:nth-child(even) { 
-        background-color: #fff0e6; 
-    }
-    tr:nth-child(odd) { 
-        background-color: white; 
-    }
+
+    /* Copy button */
     .copy-btn {
-        background-color: #33cc99;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: var(--success);
         color: white;
-        border: 2px solid #333;
-        padding: 8px 15px;
-        border-radius: 8px;
+        border: none;
+        font-size: 11px;
+        font-weight: 500;
         cursor: pointer;
-        font-size: 14px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        white-space: nowrap;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 2px 2px 0 #333;
-        transition: all 0.2s;
+        transition: all 0.15s ease;
+        width: 60px;
+        height: 24px;
     }
-    .copy-btn:hover { 
-        background-color: #29a37a; 
-        transform: translateY(-2px);
-        box-shadow: 3px 3px 0 #333;
+
+    .copy-btn:hover {
+        opacity: 0.9;
     }
-    .copy-btn:active {
-        transform: translateY(1px);
-        box-shadow: 1px 1px 0 #333;
-    }
+
     .copy-btn.copied {
-        background-color: #ff3333 !important;
-        cursor: not-allowed;
-        animation: wiggle 0.5s;
-    }
-    .copy-btn:disabled {
-        background-color: #999999 !important;
-        color: #666;
-        cursor: not-allowed;
-        box-shadow: 1px 1px 0 #666;
-        border-color: #666;
-        transform: none;
-    }
-    @keyframes wiggle {
-        0%, 100% { transform: rotate(0); }
-        25% { transform: rotate(-5deg); }
-        75% { transform: rotate(5deg); }
-    }
-    /* Hide Survey Model and Generated Link columns visually */
-    th:nth-child(3), td:nth-child(3),
-    th:nth-child(4), td:nth-child(4) {
-        display: none;
-    }
-    .status {
-        text-align: center;
-        margin: 25px 0;
-        padding: 15px;
-        border-radius: 10px;
-        border: 3px solid;
-        font-weight: bold;
-        font-size: 18px;
-        box-shadow: 3px 3px 0 #333;
-    }
-    .status.success { 
-        background-color: #ccffcc; 
-        color: #006600; 
-        border-color: #33cc33;
-    }
-    .status.error { 
-        background-color: #ffcccc; 
-        color: #cc0000; 
-        border-color: #ff3333;
-    }
-    .table-container {
-        max-height: 600px;
-        overflow-y: auto;
-        border: 4px solid #333;
-        border-radius: 15px;
-        box-shadow: 5px 5px 0 #333;
-        background: white;
-    }
-    .comic-dots {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: #ffcc00;
-        border: 3px solid #333;
-        border-radius: 50%;
-    }
-    .dot-1 { top: 20px; left: 20px; }
-    .dot-2 { top: 20px; right: 20px; }
-    .dot-3 { bottom: 20px; left: 20px; }
-    .dot-4 { bottom: 20px; right: 20px; }
-    .speech-bubble {
-        position: absolute;
-        bottom: -40px;
-        right: 30px;
-        background: white;
-        border: 3px solid #333;
-        border-radius: 20px;
-        padding: 10px 15px;
-        font-weight: bold;
-        box-shadow: 3px 3px 0 #333;
-        transform: rotate(-5deg);
-        animation: float 3s infinite ease-in-out;
-    }
-    .speech-bubble:after {
-        content: "";
-        position: absolute;
-        bottom: -15px;
-        right: 30px;
-        border-width: 15px 10px 0;
-        border-style: solid;
-        border-color: white transparent;
-        display: block;
-        width: 0;
-    }
-    .speech-bubble:before {
-        content: "";
-        position: absolute;
-        bottom: -18px;
-        right: 29px;
-        border-width: 16px 11px 0;
-        border-style: solid;
-        border-color: #333 transparent;
-        display: block;
-        width: 0;
-    }
-    @keyframes float {
-        0%, 100% { transform: rotate(-5deg) translateY(0); }
-        50% { transform: rotate(-5deg) translateY(-5px); }
+        background: var(--warning);
+        color: var(--text);
     }
 
-    /* Search Box Styles */
-    .search-container {
-        margin: 20px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-    .search-box {
-        padding: 12px 15px;
-        border: 3px solid #333;
-        border-radius: 10px;
-        font-size: 16px;
-        font-family: 'Comic Sans MS', sans-serif;
-        width: 300px;
-        max-width: 100%;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
-    }
-    .search-box:focus {
-        outline: none;
-        box-shadow: 5px 5px 0 #ffcc00;
-        transform: translateY(-2px);
-    }
-    .search-btn {
-        padding: 12px 20px;
-        background-color: #ff6600;
-        color: white;
-        border: 3px solid #333;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
-    }
-    .search-btn:hover {
-        background-color: #e65c00;
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 0 #333;
-    }
-    .search-btn:active {
-        transform: translateY(1px);
-        box-shadow: 2px 2px 0 #333;
-    }
-    .clear-search {
-        padding: 12px 20px;
-        background-color: #cccccc;
-        color: #333;
-        border: 3px solid #333;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
-    }
-    .clear-search:hover {
-        background-color: #b3b3b3;
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 0 #333;
-    }
-    .clear-search:active {
-        transform: translateY(1px);
-        box-shadow: 2px 2px 0 #333;
-    }
-
-    /* Filter Styles */
-    .filter-container {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin: 20px 0;
-        flex-wrap: wrap;
-    }
-    .filter-btn {
-        padding: 10px 20px;
-        background-color: #99ccff;
-        color: #333;
-        border: 3px solid #333;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
-    }
-    .filter-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 0 #333;
-    }
-    .filter-btn.active {
-        background-color: #3399ff;
-        color: white;
-    }
-
-    /* QR Code Modal Styles */
+    /* QR Modal - Compact */
     .qr-modal {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
         z-index: 1000;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        padding: 12px;
     }
+
     .qr-modal-content {
-        background-color: white;
-        padding: 30px;
-        border-radius: 20px;
-        border: 5px solid #333;
-        box-shadow: 10px 10px 0 #333, 15px 15px 0 #ffcc00;
-        max-width: 90%;
-        max-height: 90%;
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 12px;
+        width: 100%;
+        max-width: 500px;
+        max-height: 90vh;
         overflow: auto;
-        position: relative;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
+
     .qr-modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 15px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
     }
+
     .qr-modal-title {
-        font-size: 28px;
-        color: #ff3300;
-        text-shadow: 2px 2px 0 #ffcc00;
         margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
     }
+
     .close-modal {
-        background-color: #ff3333;
-        color: white;
-        border: 3px solid #333;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        width: 28px;
+        height: 28px;
         display: flex;
-        justify-content: center;
         align-items: center;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        color: var(--text-light);
     }
+
     .close-modal:hover {
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 0 #333;
+        background: #f3f4f6;
     }
+
     .qr-container {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 20px;
+        gap: 12px;
     }
+
     .qr-display {
-        position: relative;
-        width: 320px;
-        height: 370px;
-        overflow: hidden;
-        border: 4px solid #333;
-        border-radius: 15px;
-        box-shadow: 5px 5px 0 #333;
-        background: white;
-        touch-action: pan-y;
-    }
-    .qr-slides {
-        display: flex;
-        transition: transform 0.3s ease;
-        height: 100%;
-        width: 100%;
-    }
-    .qr-slide {
-        min-width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 20px;
-        text-align: center;
-        box-sizing: border-box;
-    }
-    .qr-code {
-        width: 220px;
-        height: 220px;
-        margin-bottom: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: white;
-        border: 2px solid #333;
-        border-radius: 10px;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-    .qr-code img {
-        max-width: 100%;
-        max-height: 100%;
-        display: block;
-    }
-    .qr-info {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        background: #fff9e6;
-        padding: 8px 15px;
-        border-radius: 10px;
-        border: 2px solid #333;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .qr-nav {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 10px;
-    }
-    .qr-nav-btn {
-        padding: 8px 15px;
-        background-color: #ffcc00;
-        color: #333;
-        border: 3px solid #333;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: bold;
-        font-family: 'Comic Sans MS', sans-serif;
-        box-shadow: 3px 3px 0 #333;
-        transition: all 0.2s;
-    }
-    .qr-nav-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 5px 5px 0 #333;
-    }
-    .qr-nav-btn:active {
-        transform: translateY(1px);
-        box-shadow: 2px 2px 0 #333;
-    }
-    .qr-nav-btn:disabled {
-        background-color: #cccccc;
-        color: #999;
-        cursor: not-allowed;
-        box-shadow: 2px 2px 0 #999;
-        border-color: #999;
-    }
-    .qr-counter {
-        font-weight: bold;
-        font-size: 16px;
-        margin-top: 10px;
-        background: #3399ff;
-        color: white;
-        padding: 5px 15px;
-        border-radius: 20px;
-        border: 2px solid #333;
+        gap: 8px;
+        padding: 12px;
+        background: #f8fafc;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
     }
 
-    /* Responsive adjustments */
+    .qr-code {
+        width: 180px;
+        height: 180px;
+        padding: 10px;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
+    .qr-info {
+        text-align: center;
+        font-size: 11px;
+        color: var(--text-light);
+    }
+
+    .qr-nav {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .qr-nav-btn {
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        background: white;
+        border-radius: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        min-width: 80px;
+    }
+
+    .qr-nav-btn:hover {
+        background: #f9fafb;
+    }
+
+    .qr-counter {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text-light);
+        padding: 4px 8px;
+        background: #f3f4f6;
+        border-radius: 4px;
+    }
+
+    /* Hide decorative elements */
+    .comic-dots, .speech-bubble {
+        display: none !important;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
+        html, body {
+            padding: 4px;
+        }
+        
         .container {
-            padding: 15px;
-        }
-        h1 {
-            font-size: 28px;
-            padding: 8px 20px;
-        }
-        .file-section {
-            padding: 20px 15px;
-        }
-        .button-group {
-            flex-direction: column;
-            align-items: center;
-        }
-        .btn {
-            width: 100%;
-            max-width: 300px;
-        }
-        table {
-            font-size: 14px;
-        }
-        th, td {
             padding: 8px;
         }
+        
+        .file-section {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+        
+        .file-input-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .file-name {
+            text-align: center;
+        }
+        
+        .search-box {
+            max-width: none;
+        }
+        
+        table {
+            min-width: 600px;
+        }
+        
+        .qr-modal-content {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .button-group {
+            justify-content: center;
+        }
+        
+        .btn {
+            flex: 1;
+            min-width: 80px;
+            justify-content: center;
+        }
+        
+        .filter-container {
+            justify-content: center;
+        }
+        
         .search-container {
             flex-direction: column;
+            align-items: stretch;
         }
-        .search-box {
+        
+        .search-box, .search-btn, .clear-search {
             width: 100%;
+            max-width: none;
         }
-        .filter-container {
-            flex-direction: column;
-            align-items: center;
-        }
-        .filter-btn {
-            width: 100%;
-            max-width: 200px;
-        }
-        .qr-modal-content {
-            padding: 20px;
-        }
-        .qr-display {
-            width: 280px;
-            height: 330px;
-        }
-        .qr-code {
-            width: 200px;
-            height: 200px;
-        }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
     }
 </style>
 </head>
@@ -700,27 +556,26 @@
     <div class="comic-dots dot-3"></div>
     <div class="comic-dots dot-4"></div>
     
-    <h1>Survey Link Generator</h1>
+    <h1> "Pattampoochi maadhiri parakkanum, kolaavi maadhiri kodukkanum!” </h1>
     
     <div class="file-section">
         <div class="file-input-container">
-            <label for="fileInput" class="file-label">📁 CHOOSE EXCEL FILE</label>
+            <label for="fileInput" class="file-label">📁 Choose Excel File</label>
             <input type="file" id="fileInput" accept=".xlsx, .xls">
             <div class="file-name" id="fileName">No file chosen</div>
         </div>
         <div class="button-group">
-            <button class="btn btn-primary" id="generateBtn" onclick="processFile()" disabled>Generate Links</button>
-            <button class="btn btn-warning" onclick="clearData()">Clear All</button>
+            <button class="btn btn-primary" id="generateBtn" onclick="processFile()" disabled>Generate</button>
+            <button class="btn btn-warning" onclick="clearData()">Clear</button>
         </div>
     </div>
     
     <div id="status" class="status" style="display: none;"></div>
     
     <div class="button-group">
-        <button class="btn btn-success" id="copyAllBtn" onclick="copyAllLinks()" disabled>Copy All Links</button>
-        <button class="btn btn-primary" onclick="exportToCSV()" id="exportBtn" disabled>Export to CSV</button>
-        <button class="btn btn-info" id="openQRBtn" onclick="openQRModal()" disabled>Open QR Codes</button>
-        <div class="speech-bubble">Click me!</div>
+        <button class="btn btn-success" id="copyAllBtn" onclick="copyAllLinks()" disabled>Copy All</button>
+        <button class="btn btn-primary" onclick="exportToCSV()" id="exportBtn" disabled>Export CSV</button>
+        <button class="btn btn-info" id="openQRBtn" onclick="openQRModal()" disabled>QR Codes</button>
     </div>
     
     <!-- Sales Type Filters -->
@@ -735,18 +590,18 @@
     <div class="search-container">
         <input type="text" id="searchBox" class="search-box" placeholder="Search by Order ID (e.g., 5031)" disabled>
         <button class="search-btn" id="searchBtn" onclick="searchOrderId()" disabled>Search</button>
-        <button class="clear-search" id="clearSearchBtn" onclick="clearSearch()" disabled>Clear Search</button>
+        <button class="clear-search" id="clearSearchBtn" onclick="clearSearch()" disabled>Clear</button>
     </div>
     
     <div class="table-container">
-        <table id="linkTable">
+        <table id="linkTable" aria-describedby="A compact table of generated survey links">
             <thead>
                 <tr>
-                    <th>Receipt No.</th>
-                    <th>Sales Type</th>
-                    <th>Survey Model</th>
-                    <th>Generated Link</th>
-                    <th>Action</th>
+                    <th style="width:18%;">Receipt No.</th>
+                    <th style="width:16%;">Sales Type</th>
+                    <th style="width:12%;">Survey Model</th>
+                    <th style="width:44%;">Generated Link</th>
+                    <th style="width:10%;">Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -772,15 +627,16 @@
         
         <div class="qr-container">
             <div class="qr-display" id="qrDisplay">
-                <div class="qr-slides" id="qrSlides">
-                    <!-- QR slides will be generated here -->
-                </div>
+                <!-- QR slides will be generated here -->
             </div>
             <div class="qr-nav">
                 <button class="qr-nav-btn" id="prevBtn" onclick="prevQR()">Previous</button>
+                <span class="qr-counter" id="qrCounter">1 / 0</span>
                 <button class="qr-nav-btn" id="nextBtn" onclick="nextQR()">Next</button>
             </div>
-            <div class="qr-counter" id="qrCounter">1 / 0</div>
+            <div class="qr-info">
+                Use buttons to navigate • Click QR code to open link
+            </div>
         </div>
     </div>
 </div>
@@ -794,11 +650,19 @@ let currentQRData = [];
 let currentQRIndex = 0;
 const storeID = "91KDIPL540-01"; // Store Code
 
+// Initialize file input functionality
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+    document.getElementById('fileName').textContent = fileName;
+    document.getElementById('generateBtn').disabled = !e.target.files[0];
+});
+
 // Excel date/time converters
 function convertExcelDate(serial) {
     const date = new Date((serial - 25569) * 86400 * 1000);
     return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
 }
+
 function convertExcelTime(serial) {
     const totalMilliseconds = Math.round(serial * 24 * 60 * 60 * 1000);
     const hours = String(Math.floor(totalMilliseconds / (60 * 60 * 1000))).padStart(2,'0');
@@ -808,7 +672,7 @@ function convertExcelTime(serial) {
     return `${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
 
-// Generate link
+// Generate survey link
 function generateSurveyLink(row) {
     const receiptNo = row['Receipt No.'];
     const salesType = row['Sales Type'];
@@ -831,7 +695,22 @@ function generateSurveyLink(row) {
     return `https://customer.kfc-listens.com/jfe/form/SV_8bHC0noyvM3jPWC?Q_EED=${encodedData}`;
 }
 
-// File processing
+// Show status message
+function showStatus(message, type) {
+    const statusDiv = document.getElementById('status');
+    statusDiv.textContent = message;
+    statusDiv.className = `status ${type}`;
+    statusDiv.style.display = 'block';
+    
+    // Auto-hide success messages after 3 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            statusDiv.style.display = 'none';
+        }, 3000);
+    }
+}
+
+// Process uploaded file
 function processFile() {
     const file = document.getElementById('fileInput').files[0];
     if (!file) return showStatus('Please select a file first', 'error');
@@ -858,7 +737,7 @@ function processFile() {
                         salesType: row['Sales Type'],
                         surveyModel: link.includes('SM=6.0') ? '6.0' : link.includes('SM=4.0') ? '4.0' : link.includes('SM=3.0') ? '3.0' : 'Unknown',
                         link: link,
-                        copied: false // Track if this link has been copied
+                        copied: false
                     };
                     currentData.push(linkData);
                 }
@@ -866,6 +745,8 @@ function processFile() {
 
             // Display all data initially
             displayData(currentData);
+            setupSalesTypeFilters();
+            setupQRFilters();
 
             showStatus(`Processed ${processedCount} records`, 'success');
             document.getElementById('copyAllBtn').disabled = false;
@@ -880,7 +761,7 @@ function processFile() {
             // Show sales type filters
             document.getElementById('salesTypeFilters').style.display = 'flex';
             
-            // Generate QR codes for all data
+            // Generate QR codes
             generateQRCodes(currentData);
         } catch (err) {
             showStatus('Error: ' + err.message, 'error');
@@ -900,7 +781,7 @@ function displayData(data) {
             <td>${linkData.receiptNo}</td>
             <td>${linkData.salesType}</td>
             <td>${linkData.surveyModel}</td>
-            <td>${linkData.link}</td>
+            <td title="${linkData.link}">${linkData.link}</td>
             <td><button class="copy-btn" data-index="${index}">Copy</button></td>
         `;
         tbody.appendChild(tr);
@@ -915,6 +796,39 @@ function displayData(data) {
     });
 }
 
+// Copy individual link
+function copyIndividualLink(index, button) {
+    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
+    const linkData = dataToUse[index];
+    
+    if (linkData.copied) return;
+    
+    const link = linkData.link;
+    navigator.clipboard.writeText(link).then(() => {
+        linkData.copied = true;
+        button.classList.add('copied');
+        button.disabled = true;
+        showStatus('Link copied to clipboard', 'success');
+    }).catch(err => {
+        showStatus('Copy failed: ' + err.message, 'error');
+    });
+}
+
+// Copy all links
+function copyAllLinks() {
+    if (currentData.length === 0) {
+        showStatus('No data to copy', 'error');
+        return;
+    }
+    
+    const allLinks = currentData.map(item => item.link).join('\n');
+    navigator.clipboard.writeText(allLinks).then(() => {
+        showStatus(`Copied ${currentData.length} links to clipboard`, 'success');
+    }).catch(err => {
+        showStatus('Copy failed: ' + err.message, 'error');
+    });
+}
+
 // Search by Order ID
 function searchOrderId() {
     const searchTerm = document.getElementById('searchBox').value.trim();
@@ -924,7 +838,6 @@ function searchOrderId() {
         return;
     }
     
-    // Filter data based on search term
     filteredData = currentData.filter(item => 
         item.receiptNo.includes(searchTerm)
     );
@@ -934,24 +847,22 @@ function searchOrderId() {
         return;
     }
     
-    // Display filtered data
     displayData(filteredData);
-    
     showStatus(`Found ${filteredData.length} matching records`, 'success');
 }
 
-// Clear search and show all data
+// Clear search
 function clearSearch() {
     document.getElementById('searchBox').value = '';
+    filteredData = [];
     displayData(currentData);
     showStatus('Showing all records', 'success');
 }
 
-// Filter by sales type
+// Setup sales type filters
 function setupSalesTypeFilters() {
     document.querySelectorAll('#salesTypeFilters .filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            // Update active button
             document.querySelectorAll('#salesTypeFilters .filter-btn').forEach(b => {
                 b.classList.remove('active');
             });
@@ -971,334 +882,169 @@ function setupSalesTypeFilters() {
     });
 }
 
-// Copy individual link
-function copyIndividualLink(index, button) {
-    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
-    const linkData = dataToUse[index];
-    
-    // If already copied, do nothing
-    if (linkData.copied) {
+// Export to CSV
+function exportToCSV() {
+    if (currentData.length === 0) {
+        showStatus('No data to export', 'error');
         return;
     }
     
-    const link = linkData.link;
-    
-    // Create a temporary textarea element
-    const textArea = document.createElement("textarea");
-    textArea.value = link;
-    textArea.style.position = "fixed";
-    textArea.style.left = "-999999px";
-    textArea.style.top = "-999999px";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-        const successful = document.execCommand('copy');
-        if (successful) {
-            // Mark as copied and disable the button
-            linkData.copied = true;
-            button.textContent = 'Copied!';
-            button.classList.add('copied');
-            button.disabled = true;
-            
-            showStatus('Link copied to clipboard!', 'success');
-        } else {
-            showStatus('Failed to copy link', 'error');
-        }
-    } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
-        showStatus('Failed to copy link', 'error');
-    }
-    
-    document.body.removeChild(textArea);
-}
-
-// Copy all links
-function copyAllLinks() {
-    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
-    const links = dataToUse.map(item => item.link).join('\n');
-    
-    // Create a temporary textarea element
-    const textArea = document.createElement("textarea");
-    textArea.value = links;
-    textArea.style.position = "fixed";
-    textArea.style.left = "-999999px";
-    textArea.style.top = "-999999px";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-        const successful = document.execCommand('copy');
-        if (successful) {
-            // Mark all links as copied and disable all copy buttons
-            dataToUse.forEach((item, index) => {
-                item.copied = true;
-            });
-            
-            document.querySelectorAll('.copy-btn').forEach(button => {
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
-                button.disabled = true;
-            });
-            
-            showStatus('All links copied to clipboard!', 'success');
-        } else {
-            showStatus('Failed to copy all links', 'error');
-        }
-    } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
-        showStatus('Failed to copy all links', 'error');
-    }
-    
-    document.body.removeChild(textArea);
-}
-
-// Export to CSV
-function exportToCSV() {
-    const dataToUse = filteredData.length > 0 ? filteredData : currentData;
-    
-    if (dataToUse.length === 0) return showStatus('No data to export', 'error');
-    
-    let csvContent = "Receipt No.,Sales Type,Survey Model,Generated Link\n";
-    dataToUse.forEach(row => {
-        csvContent += `"${row.receiptNo}","${row.salesType}","${row.surveyModel}","${row.link}"\n`;
-    });
+    const headers = ['Receipt No.', 'Sales Type', 'Survey Model', 'Generated Link'];
+    const csvContent = [
+        headers.join(','),
+        ...currentData.map(item => [
+            `"${item.receiptNo}"`,
+            `"${item.salesType}"`,
+            `"${item.surveyModel}"`,
+            `"${item.link}"`
+        ].join(','))
+    ].join('\n');
     
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", "survey_links.csv");
+    link.setAttribute('href', url);
+    link.setAttribute('download', `survey_links_${new Date().toISOString().slice(0,10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showStatus('CSV exported successfully!', 'success');
-}
-
-// Generate QR codes
-function generateQRCodes(data) {
-    currentQRData = data;
-    const qrSlides = document.getElementById('qrSlides');
-    qrSlides.innerHTML = '';
     
-    if (data.length === 0) {
-        qrSlides.innerHTML = '<div class="qr-slide"><p>No data available for QR codes</p></div>';
-        updateQRCounter();
-        return;
-    }
-    
-    data.forEach((item, index) => {
-        const slide = document.createElement('div');
-        slide.className = 'qr-slide';
-        
-        // Create QR code
-        const qrCode = document.createElement('div');
-        qrCode.className = 'qr-code';
-        qrCode.id = `qr-${index}`;
-        
-        // Create info div
-        const info = document.createElement('div');
-        info.className = 'qr-info';
-        info.innerHTML = `
-            <div>Receipt: ${item.receiptNo}</div>
-            <div>Type: ${item.salesType}</div>
-        `;
-        
-        slide.appendChild(qrCode);
-        slide.appendChild(info);
-        qrSlides.appendChild(slide);
-        
-        // Generate QR code
-        const qr = qrcode(0, 'M');
-        qr.addData(item.link);
-        qr.make();
-        qrCode.innerHTML = qr.createImgTag(5);
-    });
-    
-    currentQRIndex = 0;
-    updateQRSlides();
-    updateQRCounter();
-    updateQRNavigation();
-}
-
-// Open QR modal
-function openQRModal() {
-    document.getElementById('qrModal').style.display = 'flex';
-    generateQRCodes(currentQRData);
-}
-
-// Close QR modal
-function closeQRModal() {
-    document.getElementById('qrModal').style.display = 'none';
-}
-
-// Filter QR codes by sales type
-function setupQRFilters() {
-    document.querySelectorAll('#qrFilters .filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Update active button
-            document.querySelectorAll('#qrFilters .filter-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            const type = this.getAttribute('data-type');
-            
-            if (type === 'all') {
-                generateQRCodes(currentData);
-            } else {
-                const filtered = currentData.filter(item => item.salesType === type);
-                generateQRCodes(filtered);
-            }
-        });
-    });
-}
-
-// Navigate QR codes
-function nextQR() {
-    if (currentQRIndex < currentQRData.length - 1) {
-        currentQRIndex++;
-        updateQRSlides();
-        updateQRCounter();
-        updateQRNavigation();
-    }
-}
-
-function prevQR() {
-    if (currentQRIndex > 0) {
-        currentQRIndex--;
-        updateQRSlides();
-        updateQRCounter();
-        updateQRNavigation();
-    }
-}
-
-function updateQRSlides() {
-    const qrSlides = document.getElementById('qrSlides');
-    qrSlides.style.transform = `translateX(-${currentQRIndex * 100}%)`;
-}
-
-function updateQRCounter() {
-    const counter = document.getElementById('qrCounter');
-    counter.textContent = `${currentQRIndex + 1} / ${currentQRData.length}`;
-}
-
-function updateQRNavigation() {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    
-    prevBtn.disabled = currentQRIndex === 0;
-    nextBtn.disabled = currentQRIndex === currentQRData.length - 1;
-}
-
-// Add swipe functionality for QR codes
-function setupSwipe() {
-    const qrDisplay = document.getElementById('qrDisplay');
-    let startX = 0;
-    let endX = 0;
-    
-    qrDisplay.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-    });
-    
-    qrDisplay.addEventListener('touchend', function(e) {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-    
-    // Add mouse support for desktop
-    qrDisplay.addEventListener('mousedown', function(e) {
-        startX = e.clientX;
-        document.addEventListener('mouseup', handleMouseUp);
-    });
-    
-    function handleMouseUp(e) {
-        endX = e.clientX;
-        handleSwipe();
-        document.removeEventListener('mouseup', handleMouseUp);
-    }
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Swipe left - next
-                nextQR();
-            } else {
-                // Swipe right - previous
-                prevQR();
-            }
-        }
-    }
+    showStatus(`Exported ${currentData.length} records to CSV`, 'success');
 }
 
 // Clear all data
 function clearData() {
     currentData = [];
     filteredData = [];
-    currentQRData = [];
-    currentQRIndex = 0;
     document.querySelector('#linkTable tbody').innerHTML = '';
-    document.getElementById('fileInput').value = '';
     document.getElementById('fileName').textContent = 'No file chosen';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('searchBox').value = '';
+    document.getElementById('status').style.display = 'none';
     document.getElementById('copyAllBtn').disabled = true;
     document.getElementById('exportBtn').disabled = true;
     document.getElementById('openQRBtn').disabled = true;
-    document.getElementById('status').style.display = 'none';
-    
-    // Disable search functionality
+    document.getElementById('generateBtn').disabled = true;
     document.getElementById('searchBox').disabled = true;
     document.getElementById('searchBtn').disabled = true;
     document.getElementById('clearSearchBtn').disabled = true;
-    document.getElementById('searchBox').value = '';
-    
-    // Hide filters
     document.getElementById('salesTypeFilters').style.display = 'none';
+    showStatus('All data cleared', 'success');
+}
+
+// QR Code functions
+function generateQRCodes(data) {
+    currentQRData = data;
+    currentQRIndex = 0;
+}
+
+function setupQRFilters() {
+    document.querySelectorAll('#qrFilters .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('#qrFilters .filter-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            const type = this.getAttribute('data-type');
+            let filteredQRData;
+            
+            if (type === 'all') {
+                filteredQRData = currentData;
+            } else {
+                filteredQRData = currentData.filter(item => item.salesType === type);
+            }
+            
+            if (filteredQRData.length > 0) {
+                generateQRCodes(filteredQRData);
+                showQRCode(currentQRIndex);
+            }
+        });
+    });
+}
+
+function showQRCode(index) {
+    const qrDisplay = document.getElementById('qrDisplay');
+    qrDisplay.innerHTML = '';
     
-    // Close QR modal if open
-    closeQRModal();
-}
-
-// Show status message
-function showStatus(message, type) {
-    const statusEl = document.getElementById('status');
-    statusEl.textContent = message;
-    statusEl.className = `status ${type}`;
-    statusEl.style.display = 'block';
-}
-
-// Enable generate button when file is selected and show file name
-document.getElementById('fileInput').addEventListener('change', function() {
-    const fileName = this.files.length > 0 ? this.files[0].name : 'No file chosen';
-    document.getElementById('fileName').textContent = fileName;
-    document.getElementById('generateBtn').disabled = !this.files.length;
-});
-
-// Enable search when Enter key is pressed in search box
-document.getElementById('searchBox').addEventListener('keyup', function(event) {
-    if (event.key === 'Enter') {
-        searchOrderId();
+    if (currentQRData.length === 0) {
+        qrDisplay.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-light);">No QR codes to display</div>';
+        document.getElementById('qrCounter').textContent = '0 / 0';
+        return;
     }
-});
+    
+    const item = currentQRData[index];
+    const qr = qrcode(0, 'L');
+    qr.addData(item.link);
+    qr.make();
+    
+    const qrCodeDiv = document.createElement('div');
+    qrCodeDiv.className = 'qr-code';
+    qrCodeDiv.innerHTML = qr.createSvgTag();
+    
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'qr-info';
+    infoDiv.innerHTML = `
+        <div><strong>Receipt:</strong> ${item.receiptNo}</div>
+        <div><strong>Type:</strong> ${item.salesType}</div>
+        <div><strong>Model:</strong> ${item.surveyModel}</div>
+    `;
+    
+    qrDisplay.appendChild(qrCodeDiv);
+    qrDisplay.appendChild(infoDiv);
+    
+    document.getElementById('qrCounter').textContent = `${index + 1} / ${currentQRData.length}`;
+    
+    // Make QR code clickable
+    qrCodeDiv.style.cursor = 'pointer';
+    qrCodeDiv.onclick = () => window.open(item.link, '_blank');
+}
 
-// Close modal when clicking outside
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('qrModal');
-    if (event.target === modal) {
+function openQRModal() {
+    if (currentQRData.length === 0) {
+        showStatus('No QR codes to display', 'error');
+        return;
+    }
+    
+    document.getElementById('qrModal').style.display = 'flex';
+    showQRCode(currentQRIndex);
+}
+
+function closeQRModal() {
+    document.getElementById('qrModal').style.display = 'none';
+}
+
+function prevQR() {
+    if (currentQRData.length === 0) return;
+    currentQRIndex = (currentQRIndex - 1 + currentQRData.length) % currentQRData.length;
+    showQRCode(currentQRIndex);
+}
+
+function nextQR() {
+    if (currentQRData.length === 0) return;
+    currentQRIndex = (currentQRIndex + 1) % currentQRData.length;
+    showQRCode(currentQRIndex);
+}
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('qrModal').style.display === 'flex') {
         closeQRModal();
     }
 });
 
-// Initialize filters and swipe functionality
-document.addEventListener('DOMContentLoaded', function() {
+// Close modal when clicking outside
+document.getElementById('qrModal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('qrModal')) {
+        closeQRModal();
+    }
+});
+
+// Initialize filters on load
+document.addEventListener('DOMContentLoaded', () => {
     setupSalesTypeFilters();
     setupQRFilters();
-    setupSwipe();
 });
 </script>
 </body>
