@@ -18,7 +18,7 @@
         --border: #e5e7eb;
         --radius: 8px;
         --shadow: 0 1px 3px rgba(0,0,0,0.1);
-        --maxw: 1000px;
+        --maxw: 800px;
     }
 
     /* Base */
@@ -258,7 +258,7 @@
         height: 32px;
     }
 
-    /* Table - Ultra Compact */
+    /* Table - Ultra Compact with 3 columns only */
     .table-container {
         border: 1px solid var(--border);
         border-radius: var(--radius);
@@ -270,7 +270,7 @@
         width: 100%;
         border-collapse: collapse;
         font-size: 12px;
-        min-width: 700px;
+        min-width: 400px;
     }
 
     thead {
@@ -302,21 +302,59 @@
 
     tbody td {
         padding: 6px 10px;
-        vertical-align: top;
+        vertical-align: middle;
     }
 
-    /* Link cell with truncation */
-    td:nth-child(4) {
-        max-width: 300px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    /* Column widths for 3-column layout */
+    th:nth-child(1), td:nth-child(1) {
+        width: 45%;
+    }
+    
+    th:nth-child(2), td:nth-child(2) {
+        width: 35%;
+    }
+    
+    th:nth-child(3), td:nth-child(3) {
+        width: 20%;
+        text-align: center;
+    }
+
+    /* Sales Type badges */
+    .sales-type-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 12px;
         font-size: 11px;
-        color: #374151;
+        font-weight: 500;
+        text-align: center;
+        min-width: 70px;
     }
 
-    /* Copy button */
+    .badge-dinein {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+    }
+
+    .badge-takeaway {
+        background: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #93c5fd;
+    }
+
+    .badge-delivery {
+        background: #f3e8ff;
+        color: #6b21a8;
+        border: 1px solid #d8b4fe;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+    }
+
     .copy-btn {
         padding: 4px 8px;
         border-radius: 4px;
@@ -340,128 +378,32 @@
         color: var(--text);
     }
 
-    /* QR Modal - Compact */
-    .qr-modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-    }
-
-    .qr-modal-content {
-        background: var(--card);
-        border-radius: var(--radius);
-        padding: 12px;
-        width: 100%;
-        max-width: 500px;
-        max-height: 90vh;
-        overflow: auto;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    .qr-modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .qr-modal-title {
-        margin: 0;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text);
-    }
-
-    .close-modal {
-        background: none;
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        width: 28px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 12px;
-        color: var(--text-light);
-    }
-
-    .close-modal:hover {
-        background: #f3f4f6;
-    }
-
-    .qr-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .qr-display {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        padding: 12px;
-        background: #f8fafc;
-        border-radius: var(--radius);
-        border: 1px solid var(--border);
-    }
-
-    .qr-code {
-        width: 180px;
-        height: 180px;
-        padding: 10px;
-        background: white;
-        border-radius: 6px;
-        border: 1px solid var(--border);
-    }
-
-    .qr-info {
-        text-align: center;
-        font-size: 11px;
-        color: var(--text-light);
-    }
-
-    .qr-nav {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 8px;
-    }
-
-    .qr-nav-btn {
-        padding: 6px 12px;
-        border: 1px solid var(--border);
-        background: white;
-        border-radius: 6px;
-        font-size: 12px;
-        cursor: pointer;
-        min-width: 80px;
-    }
-
-    .qr-nav-btn:hover {
-        background: #f9fafb;
-    }
-
-    .qr-counter {
+    /* Receipt number styling */
+    .receipt-number {
+        font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
         font-size: 12px;
         font-weight: 500;
-        color: var(--text-light);
-        padding: 4px 8px;
-        background: #f3f4f6;
-        border-radius: 4px;
+        color: #1f2937;
     }
 
-    /* Hide decorative elements */
-    .comic-dots, .speech-bubble {
-        display: none !important;
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
     }
 
     /* Responsive */
@@ -494,11 +436,7 @@
         }
         
         table {
-            min-width: 600px;
-        }
-        
-        .qr-modal-content {
-            max-width: 100%;
+            min-width: 350px;
         }
     }
 
@@ -526,37 +464,30 @@
             width: 100%;
             max-width: none;
         }
-    }
-
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #c1c1c1;
-        border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #a8a8a8;
+        
+        th:nth-child(1), td:nth-child(1) {
+            width: 40%;
+        }
+        
+        th:nth-child(2), td:nth-child(2) {
+            width: 35%;
+        }
+        
+        th:nth-child(3), td:nth-child(3) {
+            width: 25%;
+        }
+        
+        .sales-type-badge {
+            min-width: 60px;
+            padding: 2px 6px;
+            font-size: 10px;
+        }
     }
 </style>
 </head>
 <body>
 <div class="container">
-    <div class="comic-dots dot-1"></div>
-    <div class="comic-dots dot-2"></div>
-    <div class="comic-dots dot-3"></div>
-    <div class="comic-dots dot-4"></div>
-    
-    <h1> "Pattampoochi maadhiri parakkanum, kolaavi maadhiri kodukkanum!” </h1>
+    <h1>Survey Link Generator</h1>
     
     <div class="file-section">
         <div class="file-input-container">
@@ -573,8 +504,7 @@
     <div id="status" class="status" style="display: none;"></div>
     
     <div class="button-group">
-        <button class="btn btn-success" id="copyAllBtn" onclick="copyAllLinks()" disabled>Copy All</button>
-        <button class="btn btn-primary" onclick="exportToCSV()" id="exportBtn" disabled>Export CSV</button>
+        <button class="btn btn-success" id="copyAllBtn" onclick="copyAllLinks()" disabled>Copy All Links</button>
         <button class="btn btn-info" id="openQRBtn" onclick="openQRModal()" disabled>QR Codes</button>
     </div>
     
@@ -588,20 +518,18 @@
     
     <!-- Search Box -->
     <div class="search-container">
-        <input type="text" id="searchBox" class="search-box" placeholder="Search by Order ID (e.g., 5031)" disabled>
+        <input type="text" id="searchBox" class="search-box" placeholder="Search by Receipt No." disabled>
         <button class="search-btn" id="searchBtn" onclick="searchOrderId()" disabled>Search</button>
         <button class="clear-search" id="clearSearchBtn" onclick="clearSearch()" disabled>Clear</button>
     </div>
     
     <div class="table-container">
-        <table id="linkTable" aria-describedby="A compact table of generated survey links">
+        <table id="linkTable">
             <thead>
                 <tr>
-                    <th style="width:18%;">Receipt No.</th>
-                    <th style="width:16%;">Sales Type</th>
-                    <th style="width:12%;">Survey Model</th>
-                    <th style="width:44%;">Generated Link</th>
-                    <th style="width:10%;">Action</th>
+                    <th>Receipt No.</th>
+                    <th>Sales Type</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -610,33 +538,17 @@
 </div>
 
 <!-- QR Code Modal -->
-<div class="qr-modal" id="qrModal">
-    <div class="qr-modal-content">
-        <div class="qr-modal-header">
-            <h2 class="qr-modal-title">QR Codes</h2>
-            <button class="close-modal" onclick="closeQRModal()">✕</button>
+<div class="qr-modal" id="qrModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 12px;">
+    <div style="background: white; border-radius: 8px; padding: 16px; max-width: 400px; width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h2 style="margin: 0; font-size: 14px; font-weight: 600;">QR Code</h2>
+            <button onclick="closeQRModal()" style="background: none; border: 1px solid #e5e7eb; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">✕</button>
         </div>
-        
-        <!-- QR Code Filters -->
-        <div class="filter-container" id="qrFilters">
-            <button class="filter-btn active" data-type="all">All</button>
-            <button class="filter-btn" data-type="DINE-IN">Dine-in</button>
-            <button class="filter-btn" data-type="TAKEAWAY">Takeaway</button>
-            <button class="filter-btn" data-type="DELIVERY">Delivery</button>
-        </div>
-        
-        <div class="qr-container">
-            <div class="qr-display" id="qrDisplay">
-                <!-- QR slides will be generated here -->
-            </div>
-            <div class="qr-nav">
-                <button class="qr-nav-btn" id="prevBtn" onclick="prevQR()">Previous</button>
-                <span class="qr-counter" id="qrCounter">1 / 0</span>
-                <button class="qr-nav-btn" id="nextBtn" onclick="nextQR()">Next</button>
-            </div>
-            <div class="qr-info">
-                Use buttons to navigate • Click QR code to open link
-            </div>
+        <div id="qrDisplay" style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e5e7eb;"></div>
+        <div style="display: flex; justify-content: center; gap: 8px; margin-top: 12px;">
+            <button onclick="prevQR()" style="padding: 6px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; font-size: 12px; cursor: pointer;">Previous</button>
+            <span id="qrCounter" style="font-size: 12px; font-weight: 500; padding: 6px 12px; background: #f3f4f6; border-radius: 4px;">1 / 0</span>
+            <button onclick="nextQR()" style="padding: 6px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; font-size: 12px; cursor: pointer;">Next</button>
         </div>
     </div>
 </div>
@@ -648,7 +560,7 @@ let currentData = [];
 let filteredData = [];
 let currentQRData = [];
 let currentQRIndex = 0;
-const storeID = "91KDIPL540-01"; // Store Code
+const storeID = "91KDIPL540-01";
 
 // Initialize file input functionality
 document.getElementById('fileInput').addEventListener('change', function(e) {
@@ -702,7 +614,6 @@ function showStatus(message, type) {
     statusDiv.className = `status ${type}`;
     statusDiv.style.display = 'block';
     
-    // Auto-hide success messages after 3 seconds
     if (type === 'success') {
         setTimeout(() => {
             statusDiv.style.display = 'none';
@@ -746,11 +657,9 @@ function processFile() {
             // Display all data initially
             displayData(currentData);
             setupSalesTypeFilters();
-            setupQRFilters();
 
             showStatus(`Processed ${processedCount} records`, 'success');
             document.getElementById('copyAllBtn').disabled = false;
-            document.getElementById('exportBtn').disabled = false;
             document.getElementById('openQRBtn').disabled = false;
             
             // Enable search functionality
@@ -770,19 +679,28 @@ function processFile() {
     reader.readAsArrayBuffer(file);
 }
 
-// Display data in table
+// Display data in table (3 columns only)
 function displayData(data) {
     const tbody = document.querySelector('#linkTable tbody');
     tbody.innerHTML = '';
 
     data.forEach((linkData, index) => {
         const tr = document.createElement('tr');
+        
+        // Determine badge class based on sales type
+        let badgeClass = '';
+        if (linkData.salesType === 'DINE-IN') badgeClass = 'badge-dinein';
+        else if (linkData.salesType === 'TAKEAWAY') badgeClass = 'badge-takeaway';
+        else if (linkData.salesType === 'DELIVERY') badgeClass = 'badge-delivery';
+        
         tr.innerHTML = `
-            <td>${linkData.receiptNo}</td>
-            <td>${linkData.salesType}</td>
-            <td>${linkData.surveyModel}</td>
-            <td title="${linkData.link}">${linkData.link}</td>
-            <td><button class="copy-btn" data-index="${index}">Copy</button></td>
+            <td><span class="receipt-number">${linkData.receiptNo}</span></td>
+            <td><span class="sales-type-badge ${badgeClass}">${linkData.salesType}</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="copy-btn" data-index="${index}" title="Copy survey link">Copy</button>
+                </div>
+            </td>
         `;
         tbody.appendChild(tr);
     });
@@ -794,6 +712,16 @@ function displayData(data) {
             copyIndividualLink(index, this);
         });
     });
+}
+
+// Get badge class for sales type
+function getBadgeClass(salesType) {
+    switch(salesType) {
+        case 'DINE-IN': return 'badge-dinein';
+        case 'TAKEAWAY': return 'badge-takeaway';
+        case 'DELIVERY': return 'badge-delivery';
+        default: return '';
+    }
 }
 
 // Copy individual link
@@ -808,7 +736,15 @@ function copyIndividualLink(index, button) {
         linkData.copied = true;
         button.classList.add('copied');
         button.disabled = true;
-        showStatus('Link copied to clipboard', 'success');
+        button.textContent = 'Copied!';
+        showStatus(`Copied link for receipt ${linkData.receiptNo}`, 'success');
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+            button.classList.remove('copied');
+            button.disabled = false;
+            button.textContent = 'Copy';
+        }, 2000);
     }).catch(err => {
         showStatus('Copy failed: ' + err.message, 'error');
     });
@@ -829,7 +765,7 @@ function copyAllLinks() {
     });
 }
 
-// Search by Order ID
+// Search by Receipt No.
 function searchOrderId() {
     const searchTerm = document.getElementById('searchBox').value.trim();
     
@@ -839,7 +775,7 @@ function searchOrderId() {
     }
     
     filteredData = currentData.filter(item => 
-        item.receiptNo.includes(searchTerm)
+        item.receiptNo.toLowerCase().includes(searchTerm.toLowerCase())
     );
     
     if (filteredData.length === 0) {
@@ -882,37 +818,6 @@ function setupSalesTypeFilters() {
     });
 }
 
-// Export to CSV
-function exportToCSV() {
-    if (currentData.length === 0) {
-        showStatus('No data to export', 'error');
-        return;
-    }
-    
-    const headers = ['Receipt No.', 'Sales Type', 'Survey Model', 'Generated Link'];
-    const csvContent = [
-        headers.join(','),
-        ...currentData.map(item => [
-            `"${item.receiptNo}"`,
-            `"${item.salesType}"`,
-            `"${item.surveyModel}"`,
-            `"${item.link}"`
-        ].join(','))
-    ].join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `survey_links_${new Date().toISOString().slice(0,10)}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    showStatus(`Exported ${currentData.length} records to CSV`, 'success');
-}
-
 // Clear all data
 function clearData() {
     currentData = [];
@@ -923,7 +828,6 @@ function clearData() {
     document.getElementById('searchBox').value = '';
     document.getElementById('status').style.display = 'none';
     document.getElementById('copyAllBtn').disabled = true;
-    document.getElementById('exportBtn').disabled = true;
     document.getElementById('openQRBtn').disabled = true;
     document.getElementById('generateBtn').disabled = true;
     document.getElementById('searchBox').disabled = true;
@@ -939,37 +843,12 @@ function generateQRCodes(data) {
     currentQRIndex = 0;
 }
 
-function setupQRFilters() {
-    document.querySelectorAll('#qrFilters .filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('#qrFilters .filter-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            const type = this.getAttribute('data-type');
-            let filteredQRData;
-            
-            if (type === 'all') {
-                filteredQRData = currentData;
-            } else {
-                filteredQRData = currentData.filter(item => item.salesType === type);
-            }
-            
-            if (filteredQRData.length > 0) {
-                generateQRCodes(filteredQRData);
-                showQRCode(currentQRIndex);
-            }
-        });
-    });
-}
-
 function showQRCode(index) {
     const qrDisplay = document.getElementById('qrDisplay');
     qrDisplay.innerHTML = '';
     
     if (currentQRData.length === 0) {
-        qrDisplay.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--text-light);">No QR codes to display</div>';
+        qrDisplay.innerHTML = '<div style="text-align:center; padding: 20px; color: #6b7280;">No QR codes to display</div>';
         document.getElementById('qrCounter').textContent = '0 / 0';
         return;
     }
@@ -980,15 +859,23 @@ function showQRCode(index) {
     qr.make();
     
     const qrCodeDiv = document.createElement('div');
-    qrCodeDiv.className = 'qr-code';
+    qrCodeDiv.style.width = '200px';
+    qrCodeDiv.style.height = '200px';
+    qrCodeDiv.style.display = 'flex';
+    qrCodeDiv.style.alignItems = 'center';
+    qrCodeDiv.style.justifyContent = 'center';
+    qrCodeDiv.style.background = 'white';
+    qrCodeDiv.style.borderRadius = '6px';
+    qrCodeDiv.style.border = '1px solid #e5e7eb';
     qrCodeDiv.innerHTML = qr.createSvgTag();
     
     const infoDiv = document.createElement('div');
-    infoDiv.className = 'qr-info';
+    infoDiv.style.textAlign = 'center';
+    infoDiv.style.fontSize = '12px';
+    infoDiv.style.color = '#374151';
     infoDiv.innerHTML = `
         <div><strong>Receipt:</strong> ${item.receiptNo}</div>
-        <div><strong>Type:</strong> ${item.salesType}</div>
-        <div><strong>Model:</strong> ${item.surveyModel}</div>
+        <div><strong>Type:</strong> <span class="sales-type-badge ${getBadgeClass(item.salesType)}">${item.salesType}</span></div>
     `;
     
     qrDisplay.appendChild(qrCodeDiv);
@@ -1044,7 +931,6 @@ document.getElementById('qrModal').addEventListener('click', (e) => {
 // Initialize filters on load
 document.addEventListener('DOMContentLoaded', () => {
     setupSalesTypeFilters();
-    setupQRFilters();
 });
 </script>
 </body>
